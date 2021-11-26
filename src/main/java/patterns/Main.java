@@ -1,17 +1,25 @@
 package patterns;
 
-import patterns.lesson3.app.Application;
-import patterns.lesson3.factory.impl.SurgeryFactory;
-import patterns.lesson3.factory.impl.TherapyFactory;
 
+import patterns.lesson4.departmen.impl.Surgery;
+import patterns.lesson4.departmen.impl.Therapy;
+import patterns.lesson4.service.AdministratorService;
+import patterns.lesson4.service.HumanResourcesDepartmentService;
+
+/**
+Реализация паттерна МОСТ
+ */
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Лечение в терапии: ");
-        Application appTherapy = new Application(new TherapyFactory());
-        appTherapy.treatment();
+        HumanResourcesDepartmentService humanResourcesDepartmentService = new HumanResourcesDepartmentService(new Therapy());
+        humanResourcesDepartmentService.getProfileEmployees(1);
+        humanResourcesDepartmentService.getVacancy();
+        humanResourcesDepartmentService.getResources();
 
-        System.out.println("Лечение в хирургии: ");
-        Application appSurgery = new Application(new SurgeryFactory());
-        appSurgery.treatment();
+        AdministratorService administratorService = new AdministratorService(new Surgery());
+        administratorService.getInfoPatients(1);
+        administratorService.totalFreeBeds();
+        administratorService.totalPatients();
+        administratorService.getAllPatients();
     }
 }
