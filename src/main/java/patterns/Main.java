@@ -1,17 +1,20 @@
 package patterns;
 
-import patterns.lesson3.app.Application;
-import patterns.lesson3.factory.impl.SurgeryFactory;
-import patterns.lesson3.factory.impl.TherapyFactory;
+import patterns.lesson6.cache.Cache;
+import patterns.lesson6.mapperstruct.UserConverter;
+import patterns.lesson6.repository.UserRepository;
+import patterns.lesson6.repository.impl.UserRepositoryImpl;
+import patterns.lesson6.service.UserService;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Лечение в терапии: ");
-        Application appTherapy = new Application(new TherapyFactory());
-        appTherapy.treatment();
+        start();
+    }
 
-        System.out.println("Лечение в хирургии: ");
-        Application appSurgery = new Application(new SurgeryFactory());
-        appSurgery.treatment();
+    public static void start() {
+        UserConverter userConverter = new UserConverter();
+        Cache cache = new Cache();
+        UserRepository userRepository = new UserRepositoryImpl(cache);
+        new UserService(userRepository, userConverter);
     }
 }
